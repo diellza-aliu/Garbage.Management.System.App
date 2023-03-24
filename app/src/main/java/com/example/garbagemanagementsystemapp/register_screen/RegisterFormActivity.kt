@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp
+package com.example.garbagemanagementsystemapp.register_screen
 
 import android.content.Context
 import android.content.Intent
@@ -20,11 +20,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.PermIdentity
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -38,9 +35,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.garbagemanagementsystemapp.UserServicesActivity
+import com.example.garbagemanagementsystemapp.login_screen.LoginFormActivity
 import com.example.garbagemanagementsystemapp.ui.theme.composables.CustomOutlinedTextField
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-class RegisterFormActivity : ComponentActivity() {
+@AndroidEntryPoint
+class RegisterFormActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent{
@@ -49,9 +52,10 @@ class RegisterFormActivity : ComponentActivity() {
     }
 
 @Composable
-    fun showForm(context: Context){
+    fun showForm(context: Context, viewModel: RegisterViewModel = hiltViewModel()){
         val focusManager = LocalFocusManager.current
         val scrollState = rememberScrollState()
+        val scope = rememberCoroutineScope()
         var name by rememberSaveable { mutableStateOf("") }
         var surname by rememberSaveable { mutableStateOf("") }
         var email by rememberSaveable { mutableStateOf("") }
@@ -99,6 +103,11 @@ class RegisterFormActivity : ComponentActivity() {
         ){
             if(validateData(name, surname, email, phone, password, confirmPassword)){
                 Toast.makeText(context, "Successfully registered!", Toast.LENGTH_LONG).show()
+                scope.launch {
+                    viewModel.registerUser(email, password)
+                }
+                val intent = Intent(this@RegisterFormActivity, UserServicesActivity::class.java)
+                startActivity(intent)
             }
             else{
                 Toast.makeText(context, "Please, review fields!!!", Toast.LENGTH_LONG).show()
@@ -233,10 +242,13 @@ class RegisterFormActivity : ComponentActivity() {
             }
             Text(
                 text = "Already have an account? Login",
-                modifier = Modifier.align(CenterHorizontally).clickable {
-                           val intent = Intent(this@RegisterFormActivity, LoginFormActivity::class.java)
-                               startActivity(intent)
-                },
+                modifier = Modifier
+                    .align(CenterHorizontally)
+                    .clickable {
+                        val intent =
+                            Intent(this@RegisterFormActivity, LoginFormActivity::class.java)
+                        startActivity(intent)
+                    },
                 fontSize = 14.sp,
                 color = Color.Gray,
                 fontStyle = FontStyle.Italic,

@@ -18,13 +18,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.garbagemanagementsystemapp.login_screen.LoginFormActivity
+import com.example.garbagemanagementsystemapp.navigation.NavigationGraph
+import com.example.garbagemanagementsystemapp.register_screen.RegisterFormActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalFoundationApi::class)
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            NavigationGraph()
             Column(
                 modifier = Modifier.background(Color.White)
             ){
@@ -79,7 +85,8 @@ class MainActivity : ComponentActivity() {
             }
             Row {
                 Column(
-                    modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 50.dp)
+                    modifier = Modifier
+                        .padding(0.dp, 0.dp, 0.dp, 50.dp)
                         .clickable {
                             val navigate = Intent(this@MainActivity, AdminLoginActivity::class.java)
                             startActivity(navigate)

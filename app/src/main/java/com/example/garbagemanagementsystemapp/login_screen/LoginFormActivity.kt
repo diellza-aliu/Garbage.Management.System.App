@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp
+package com.example.garbagemanagementsystemapp.login_screen
 
 import android.content.Context
 import android.content.Intent
@@ -20,11 +20,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PermIdentity
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -38,9 +35,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.garbagemanagementsystemapp.R
+import com.example.garbagemanagementsystemapp.register_screen.RegisterFormActivity
+import com.example.garbagemanagementsystemapp.UserServicesActivity
+import com.example.garbagemanagementsystemapp.register_screen.RegisterViewModel
 import com.example.garbagemanagementsystemapp.ui.theme.composables.CustomOutlinedTextField
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class LoginFormActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +54,10 @@ class LoginFormActivity : ComponentActivity() {
     }
 
     @Composable
-    fun showForm(context: Context){
+    fun showForm(context: Context, viewModel: LoginViewModel = hiltViewModel()){
         val focusManager = LocalFocusManager.current
         val scrollState = rememberScrollState()
+        val scope = rememberCoroutineScope()
         var email by rememberSaveable { mutableStateOf("") }
         var password by rememberSaveable { mutableStateOf("") }
 
@@ -75,13 +80,14 @@ class LoginFormActivity : ComponentActivity() {
         fun login (email: String, password: String){
             if(validateData(email, password)){
                 Toast.makeText(context, "Successfully logged in!", Toast.LENGTH_LONG).show()
+                scope.launch {
+                    viewModel.loginUser(email, password)
+                }
                 val intent = Intent(this@LoginFormActivity, UserServicesActivity::class.java)
                 startActivity(intent)
             }
             else{
                 Toast.makeText(context, "Please, review fields!!!", Toast.LENGTH_LONG).show()
-                val intent = Intent(this@LoginFormActivity, UserServicesActivity::class.java)
-                startActivity(intent)
             }
         }
         Column(
@@ -151,10 +157,13 @@ class LoginFormActivity : ComponentActivity() {
             }
             Text(
                 text = "Don't you have an account? Register",
-                modifier = Modifier.align(Alignment.CenterHorizontally).clickable {
-                    val intent = Intent(this@LoginFormActivity, RegisterFormActivity::class.java)
-                    startActivity(intent)
-                },
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .clickable {
+                        val intent =
+                            Intent(this@LoginFormActivity, RegisterFormActivity::class.java)
+                        startActivity(intent)
+                    },
                 fontSize = 14.sp,
                 color = Color.Gray,
                 fontStyle = FontStyle.Italic,

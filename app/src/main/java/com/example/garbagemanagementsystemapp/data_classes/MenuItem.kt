@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp.dataclasses
+package com.example.garbagemanagementsystemapp.data_classes
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
