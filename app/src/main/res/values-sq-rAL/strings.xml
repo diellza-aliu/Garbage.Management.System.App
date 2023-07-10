@@ -7,7 +7,8 @@
     <string name="Email">Email</string>
     <string name="Password">Fjalëkalimi</string>
     <string name="Login">Kyçu</string>
-    <string name="Already_have_account">Nuk keni një llogari? Regjistrohu</string>
+    <string name="Dont_you_have_an_account">Nuk keni një llogari? Regjistrohu</string>
+    <string name="Already_have_an_account">Keni një llogari? Kycuni</string>
     <string name="Home">Kryefaqja</string>
     <string name="Register_Complaint">Regjistro ankesën</string>
     <string name="My_complaint">Ankesa ime</string>
@@ -35,5 +36,21 @@
     <string name="Welcome">Mirë se vini në Yo Garbage, ku ju mund të menaxhoni mjedisin tuaj!</string>
     <string name="Admin_login">Kyçu si admin</string>
     <string name="Driver_login">Kyçu si shofer</string>
+    <string name="My_Complaint">Ankesa ime</string>
+    <string name="Update_bin_status">Përditëso statusin e koshit të plehrave</string>
     <string name="Submit">Regjistro</string>
+    <string name="Low">Ulët</string>
+    <string name="Medium">Mesatare</string>
+    <string name="High">Lartë</string>
+    <string name="New">E re</string>
+    <string name="In_progress">Në progres</string>
+    <string name="Done">E përfunduar</string>
+    <string name="Bin_Id">Shifra identifikuese e koshit të plehrave</string>
+    <string name="City">Qyteti</string>
+    <string name="Location">Lokacioni</string>
+    <string name="Load_Type">Lloji i ngarkesës</string>
+    <string name="Status">Statusi</string>
+    <string name="Update">Përditëso</string>
+    <string name="Full_Name">Emri i plotë</string>
+    <string name="Save_Profile">Ruaj profilin</string>
 </resources>

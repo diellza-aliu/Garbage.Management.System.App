@@ -234,7 +234,7 @@ fun RegisterContent(
             Text(text = stringResource(R.string.Register), fontSize = 20.sp)
         }
         Text(
-            text = stringResource(R.string.Already_have_account),
+            text = stringResource(R.string.Dont_you_have_an_account),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable {

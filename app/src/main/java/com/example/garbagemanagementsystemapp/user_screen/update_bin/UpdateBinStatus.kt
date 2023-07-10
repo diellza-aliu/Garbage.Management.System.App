@@ -13,9 +13,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.garbagemanagementsystemapp.R
 import com.example.garbagemanagementsystemapp.user_screen.my_complaints.ComplaintsModel
 
 enum class BinStatus {
@@ -66,7 +68,7 @@ fun updateBinsStatusRecyclerView(
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = "Bin ID: ${myComplaint.binId}",
+                            text = stringResource(id = R.string.Bin_Id)+ " : ${myComplaint.binId}",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(start = 8.dp)
@@ -85,7 +87,7 @@ fun updateBinsStatusRecyclerView(
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = "Status: $selectedStatus",
+                            text = stringResource(id = R.string.Status)+ " : ${myComplaint.status}",
                             fontSize = 16.sp,
                             modifier = Modifier
                                 .padding(start = 8.dp)
@@ -98,9 +100,9 @@ fun updateBinsStatusRecyclerView(
                                 contentColor = Color.White
                             ),
                             shape = RoundedCornerShape(4.dp),
-                            modifier = Modifier.padding(start = 70.dp)
+                            modifier = Modifier.padding(start = 56.dp)
                         ) {
-                            Text(text = "Update")
+                            Text(text = stringResource(id = R.string.Update))
                         }
                     }
 
@@ -115,7 +117,7 @@ fun updateBinsStatusRecyclerView(
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = "Location: ${myComplaint.location}",
+                            text = stringResource(id = R.string.Location)+ " : ${myComplaint.location}",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(start = 8.dp)
                         )

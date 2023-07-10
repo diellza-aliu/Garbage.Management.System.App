@@ -54,7 +54,6 @@ fun RegisterComplaintContent(
     val bottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed)
     val coroutineScope = rememberCoroutineScope()
 
-    Log.d("Diellzaa", "RegisterComplaint: $bottomSheetState")
     // Reset the content when the sheet is collapsed
     LaunchedEffect(bottomSheetState.isCollapsed) {
         if (bottomSheetState.isCollapsed) {
@@ -74,11 +73,11 @@ fun RegisterComplaintContent(
 
 
     Column {
-        defineText(text = "Bin ID", start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        defineText(text = stringResource(R.string.Bin_Id), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
         CustomTextField(value = binId, onValueChange = {binId = it})
-        defineText(text = "City", start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        defineText(text = stringResource(id =R.string.City), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
         CustomTextField(value = city, onValueChange = {city = it})
-        defineText(text = "Location", start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        defineText(text = stringResource(id = R.string.Location), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
 
         if (latlng == null) {
             OutlinedButton(
@@ -165,10 +164,10 @@ fun RegisterComplaintContent(
             }
         }
 
-        defineText(text = "Load Type", start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
-        var loadType = dropDownMenu(loadTypeList)
-        defineText(text = "Status", start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
-        var status = dropDownMenu(list =statusList)
+        defineText(text = stringResource(id = R.string.Load_Type), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        val loadType = dropDownMenu(loadTypeList)
+        defineText(text = stringResource(id = R.string.Status), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        val status = dropDownMenu(list =statusList)
         Button(
             onClick = {
                 registerBin(binId, city, getAddressFromCoordinates(latlng) ?: "", loadType, status)

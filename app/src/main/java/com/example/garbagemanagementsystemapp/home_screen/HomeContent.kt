@@ -145,18 +145,5 @@ fun faqFooter(){
                     startActivity(ApplicationFirebaseAuth.context, intent, null)
                 }
         )
-        Image(painter = painterResource(id = R.drawable.weather_foreground),
-            contentDescription = "Driver Register",
-            modifier = Modifier
-                .padding(280.dp, 0.dp, 0.dp, 10.dp)
-                .clip(CircleShape)
-                .size(60.dp)
-                .background(Color(112, 145, 98))
-                .clickable {
-                    val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(ApplicationFirebaseAuth.context, intent, null)
-                }
-        )
     }
 }

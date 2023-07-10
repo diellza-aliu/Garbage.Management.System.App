@@ -12,12 +12,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.garbagemanagementsystemapp.R
 
 @Composable
 fun MyProfile(
@@ -35,7 +37,7 @@ fun MyProfile(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "My Profile",
+            text = stringResource(id = R.string.Home),
             modifier = Modifier.fillMaxWidth(),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
@@ -44,7 +46,7 @@ fun MyProfile(
         )
 
         EditableProfileField(
-            label = "Name",
+            label = stringResource(id = R.string.Name),
             value = name,
             onValueChange = { newName ->
                 name = newName
@@ -55,7 +57,7 @@ fun MyProfile(
         )
 
         EditableProfileField(
-            label = "Full Name",
+            label = stringResource(id = R.string.Full_Name),
             value = fullName,
             onValueChange = { newFullName ->
                 fullName = newFullName
@@ -66,7 +68,7 @@ fun MyProfile(
         )
 
         EditableProfileField(
-            label = "Email",
+            label = stringResource(id = R.string.Email),
             value = email,
             onValueChange = { newEmail ->
                 email = newEmail
@@ -88,7 +90,7 @@ fun MyProfile(
             shape = RoundedCornerShape(50)
         ) {
             Text(
-                text = "Save Profile",
+                text = stringResource(id = R.string.Save_Profile),
                 color = Color.White,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold

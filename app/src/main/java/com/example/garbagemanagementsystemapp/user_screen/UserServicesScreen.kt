@@ -261,7 +261,7 @@ fun UserServicesScreen(
                                 )
                             ), onItemClick = {
                                 when(it.name){
-                                    "Register Complaint" -> {
+                                    "Register Complaint","Regjistro ankesën" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Register Complaint",
                                             title = "Register Complaint",
@@ -276,7 +276,7 @@ fun UserServicesScreen(
                                             }
                                         }
                                     }
-                                    "My Complaint" ->{
+                                    "My Complaint", "Ankesa ime" ->{
                                         selectedItem.value = MenuItem(
                                             id = "My Complaint",
                                             title = "My Complaint",
@@ -291,7 +291,7 @@ fun UserServicesScreen(
                                             }
                                         }
                                     }
-                                    "Update bin's status" ->{
+                                    "Update bin's status", "Përditëso statusin e koshit të plehrave" ->{
                                         selectedItem.value = MenuItem(
                                             id = "Update bin's status",
                                             title = "Update bin's status",
@@ -306,7 +306,7 @@ fun UserServicesScreen(
                                             }
                                         }
                                     }
-                                    "My profile" ->{
+                                    "My profile","Profili im" ->{
                                         selectedItem.value = MenuItem(
                                             id = "My profile",
                                             title = "My profile",

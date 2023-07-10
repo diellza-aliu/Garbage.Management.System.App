@@ -118,7 +118,7 @@ class AuthRepositoryImpl @Inject constructor(
                     userInfo["Status"] = status
                     documentReference.set(userInfo)
                 }
-                Toast.makeText(ApplicationFirebaseAuth.context, "You cannot be registered as an admin or a driver", Toast.LENGTH_LONG).show()
+                Toast.makeText(ApplicationFirebaseAuth.context, "Complaint registered successfully", Toast.LENGTH_LONG).show()
                 Response.Error(Exception())
         }catch (e: Exception) {
             Response.Error(e)
