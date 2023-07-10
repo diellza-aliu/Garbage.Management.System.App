@@ -1,11 +1,13 @@
 package com.example.garbagemanagementsystemapp.register_screen
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.garbagemanagementsystemapp.data.AuthRepository
-import com.example.garbagemanagementsystemapp.login_screen.LoginState
-import com.example.garbagemanagementsystemapp.util.Resource
-import dagger.hilt.android.HiltAndroidApp
+import com.example.garbagemanagementsystemapp.data.SignUpResponse
+import com.example.garbagemanagementsystemapp.util.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -16,23 +18,18 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val repository : AuthRepository
 ): ViewModel() {
+    var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
+        private set
 
-    val _registerState = Channel<RegisterState>()
-    val registerState = _registerState.receiveAsFlow()
-
-    fun registerUser(email: String, password: String) = viewModelScope.launch {
-        repository.registerUser(email, password).collect{result ->
-            when(result){
-                is Resource.Success ->{
-                    _registerState.send(RegisterState(isSuccess = "Login Success"))
-                }
-                is Resource.Loading ->{
-                    _registerState.send(RegisterState(isLoading = true))
-                }
-                is Resource.Error ->{
-                    _registerState.send(RegisterState(isError = result.message))
-                }
-            }
-        }
+    fun registerUser(
+        name: String,
+        surname: String,
+        email: String,
+        phone: String,
+        password: String,
+        confirmPassword: String
+    ) = viewModelScope.launch {
+        signUpResponse = Response.Loading
+        signUpResponse = repository.registerUser(name, surname, email, phone, password, confirmPassword)
     }
 }

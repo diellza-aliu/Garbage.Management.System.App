@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.garbagemanagementsystemapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:name=".ApplicationFirebaseAuth"
@@ -14,6 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GarbageManagementSystemApp"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAaJlvLck3HfM2NmW8woaV6hx9ggp6ZsQU" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,23 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".register_screen.RegisterFormActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".login_screen.LoginFormActivity"
-            android:exported="true">
-        </activity>
-        <activity
             android:name=".DriverLogin"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".AdminLoginActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".UserServicesActivity"
             android:exported="true">
         </activity>
     </application>

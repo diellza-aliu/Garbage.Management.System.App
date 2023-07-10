@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yo Garbage App</string>
+    <string name="Email_error">Formati i emailit nuk duket i drejtë</string>
+    <string name="Password_error">Duhet përzirë shkronjat e mëdha dhe të vogla, një numër, karakter i veçantë dhe një gjatësi minimale prej 8 karaktereve</string>
+    <string name="Login_to_app">Identifikohuni në aplikacionin tonë</string>
+    <string name="Email">Email</string>
+    <string name="Password">Fjalëkalimi</string>
+    <string name="Login">Kyçu</string>
+    <string name="Already_have_account">Nuk keni një llogari? Regjistrohu</string>
+    <string name="Home">Kryefaqja</string>
+    <string name="Register_Complaint">Regjistro ankesën</string>
+    <string name="My_complaint">Ankesa ime</string>
+    <string name="Update_bin">Përditëso statusin e koshit të plehrave</string>
+    <string name="Logout">Dilni</string>
+    <string name="Language">Gjuha</string>
+    <string name="Create_bin">Regjistro koshin e plehrave</string>
+    <string name="Create_driver">Regjistro shoferin</string>
+    <string name="View_driver">Shiko shoferin</string>
+    <string name="View_Complaints">Shiko ankesën</string>
+    <string name="View_Work_Reports">Shiko raportet e punës</string>
+    <string name="User_details">Detajet e përdoruesit</string>
+    <string name="My_profile">Profili im</string>
+    <string name="Collect_trash">Koshat e plehrave gati për tu mbledhur</string>
+    <string name="Name_error">Ju lutemi vendosni një emër të vlefshëm!</string>
+    <string name="Surname_error">Ju lutemi vendosni një mbiemër të vlefshëm!</string>
+    <string name="Phone_error">Formati i numrit të telefonit nuk duket i drejtë</string>
+    <string name="Equal_password_error">Fjalëkalimet duhet të jenë të njejtë</string>
+    <string name="Register_app">Regjistrohu në aplikacionin tonë</string>
+    <string name="Name">Emri</string>
+    <string name="Surname">Mbiemri</string>
+    <string name="Phone">Telefoni</string>
+    <string name="Confirm_password">Konfirmo fjalëkalimin</string>
+    <string name="Register">Regjistrohu</string>
+    <string name="Welcome">Mirë se vini në Yo Garbage, ku ju mund të menaxhoni mjedisin tuaj!</string>
+    <string name="Admin_login">Kyçu si admin</string>
+    <string name="Driver_login">Kyçu si shofer</string>
+    <string name="Submit">Regjistro</string>
+</resources>

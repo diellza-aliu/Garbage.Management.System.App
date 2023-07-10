@@ -2,6 +2,7 @@ package com.example.garbagemanagementsystemapp.ui.theme.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,19 +12,23 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import com.example.garbagemanagementsystemapp.data_classes.UserViewPair
 
 @Composable
@@ -96,7 +101,162 @@ fun CustomOutlinedTextField(
 }
 
 @Composable
-fun RecyclerView(parameterList: List<UserViewPair>, onItemClick: ((UserViewPair) -> Unit)?){
+fun CustomTextField(value: String, onValueChange: ((String) -> Unit)){
+    TextField(
+        value = value,
+        onValueChange = { newValue -> onValueChange(newValue) },
+        keyboardOptions = KeyboardOptions(
+            capitalization = KeyboardCapitalization.Sentences,
+            imeAction = ImeAction.Next
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .border(
+                width = 3.dp,
+                brush = Brush.horizontalGradient(listOf(Color(112, 145, 98), Color(151, 175, 140))),
+                shape = RoundedCornerShape(12.dp)
+            ),
+        textStyle = TextStyle(color = Color.Black, fontSize = 20.sp),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        )
+    )
+
+}
+
+@Composable
+fun EnumTextField(
+    enumValues: List<String>,
+    onValueSelected: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var textFieldValue by remember { mutableStateOf("") }
+
+    Column {
+        TextField(
+            value = textFieldValue,
+            onValueChange = { textFieldValue = it },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Words,
+                imeAction = ImeAction.Next
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .border(
+                    width = 3.dp,
+                    brush = Brush.horizontalGradient(
+                        listOf(
+                            Color(112, 145, 98),
+                            Color(151, 175, 140)
+                        )
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .clickable(onClick = { expanded = true }),
+            textStyle = TextStyle(color = Color.Black, fontSize = 20.sp),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            readOnly = true,
+            singleLine = true
+        )
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            enumValues.forEach { value ->
+                DropdownMenuItem(onClick = {
+                    textFieldValue = value
+                    onValueSelected(value)
+                    expanded = false
+                }) {
+                    Text(text = value)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun dropDownMenu(list : List<String>): String {
+    var expanded by remember{ mutableStateOf(false)}
+    var selectedItem by remember {
+        mutableStateOf("")
+    }
+    var textFieldSize by remember {
+        mutableStateOf(Size.Zero)
+    }
+
+    var icon = if(expanded){
+        Icons.Filled.KeyboardArrowUp
+    }else{
+        Icons.Filled.KeyboardArrowDown
+    }
+    
+    Column() {
+        TextField(
+            value = selectedItem,
+            onValueChange = { selectedItem = it },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Words,
+                imeAction = ImeAction.Next
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .onGloballyPositioned { coordinates ->
+                    textFieldSize = coordinates.size.toSize()
+                }
+                .border(
+                    width = 3.dp,
+                    brush = Brush.horizontalGradient(
+                        listOf(
+                            Color(112, 145, 98),
+                            Color(151, 175, 140)
+                        )
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ),
+            trailingIcon = {
+                Icon(icon, "", Modifier.clickable { expanded = !expanded })
+            },
+            textStyle = TextStyle(color = Color.Black, fontSize = 20.sp),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            readOnly = true,
+            singleLine = true
+        )
+        
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        modifier = Modifier.width(with(LocalDensity.current){textFieldSize.width.toDp()})) {
+            list.forEach { label->
+                DropdownMenuItem(onClick = {
+                    selectedItem = label
+                    expanded = false
+                }) {
+                    Text(text = label)
+                }
+            }
+        }
+        
+    }
+    return selectedItem
+}
+
+@Composable
+fun userServicesRecyclerView(parameterList: List<UserViewPair>, onItemClick: ((UserViewPair) -> Unit)?){
 
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
         items(items = parameterList,) { parameter->
@@ -113,7 +273,8 @@ fun RecyclerView(parameterList: List<UserViewPair>, onItemClick: ((UserViewPair)
 
                         Column(
                             modifier = Modifier
-                                .weight(1f).clickable {
+                                .weight(1f)
+                                .clickable {
                                     onItemClick?.invoke(parameter)
                                 }
                         ) {

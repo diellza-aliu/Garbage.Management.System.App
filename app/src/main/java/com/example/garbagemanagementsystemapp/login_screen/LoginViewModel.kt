@@ -1,11 +1,13 @@
 package com.example.garbagemanagementsystemapp.login_screen
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.garbagemanagementsystemapp.data.AuthRepository
-import com.example.garbagemanagementsystemapp.util.Resource
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
+import com.example.garbagemanagementsystemapp.data.SignInResponse
+import com.example.garbagemanagementsystemapp.util.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -16,25 +18,11 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository : AuthRepository
 ): ViewModel() {
+    var signInResponse by mutableStateOf<SignInResponse>(Response.Success(false))
 
-    val _loginState = Channel<LoginState>()
-    val loginState = _loginState.receiveAsFlow()
 
     fun loginUser(email: String, password: String) = viewModelScope.launch {
-        repository.loginUser(email, password).collect{result ->
-         when(result){
-             is Resource.Success ->{
-                 _loginState.send(LoginState(isSuccess = "Login Success"))
-             }
-             is Resource.Loading ->{
-                 _loginState.send(LoginState(isLoading = true))
-             }
-             is Resource.Error ->{
-                 _loginState.send(LoginState(isError = result.message))
-             }
-         }
-        }
+        signInResponse = Response.Loading
+        signInResponse = repository.loginUser(email, password)
     }
-
-
 }
