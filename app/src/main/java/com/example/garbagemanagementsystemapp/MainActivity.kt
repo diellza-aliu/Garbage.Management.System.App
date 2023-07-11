@@ -13,8 +13,6 @@ import androidx.navigation.NavHostController
 import com.example.garbagemanagementsystemapp.navigation.NavigationGraph
 import com.example.garbagemanagementsystemapp.navigation.Screens
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalAnimationApi
@@ -38,25 +36,26 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    private fun AuthState(){
+    private fun AuthState() {
         Log.d("Diellzaa", ": AuthState")
         val isUserSignedOut = viewModel.getAuthState().collectAsState().value
         Log.d("Firebase", "AuthState: $isUserSignedOut")
         val currentUserType = viewModel.repository.getCurrentUser()
         Log.d("Firebase", "AuthState: $currentUserType ")
 
-        if(isUserSignedOut){
-           NavigateToHomeScreen()
-        }else if(currentUserType == "1"){
-           NavigateToUserServices()
-        }else if(currentUserType == "2"){
+        if (isUserSignedOut) {
+            NavigateToHomeScreen()
+        } else if (currentUserType == "1") {
+            NavigateToUserServices()
+        } else if (currentUserType == "2") {
             NavigateToAdmin()
-        }else if(currentUserType == "3"){
+        } else if (currentUserType == "3") {
             NavigateToDriver()
-        }else{
+        } else {
             NavigateToHomeScreen()
         }
     }
+
     @Composable
     private fun NavigateToAdmin() = navController.navigate(Screens.AdminScreen.route) {
         popUpTo(navController.graph.id) {
@@ -72,11 +71,12 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun NavigateToUserServices() = navController.navigate(Screens.UserServicesScreen.route) {
-        popUpTo(navController.graph.id) {
-            inclusive = true
+    private fun NavigateToUserServices() =
+        navController.navigate(Screens.UserServicesScreen.route) {
+            popUpTo(navController.graph.id) {
+                inclusive = true
+            }
         }
-    }
 
     @Composable
     private fun NavigateToHomeScreen() = navController.navigate(Screens.HomeScreen.route) {

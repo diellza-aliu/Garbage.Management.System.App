@@ -88,7 +88,8 @@ class DriverLogin : ComponentActivity() {
                 modifier = Modifier.padding(vertical = 20.dp),
                 color = Color(112, 145, 98)
             )
-            Image(painter = painterResource(id = R.drawable.login_logo_foreground),
+            Image(
+                painter = painterResource(id = R.drawable.login_logo_foreground),
                 contentDescription = "Login Logo",
                 modifier = Modifier
                     .size(180.dp)

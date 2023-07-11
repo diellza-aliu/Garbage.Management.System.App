@@ -11,7 +11,6 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleObserver
 import com.example.garbagemanagementsystemapp.R
 import com.google.android.gms.maps.MapView
-import java.lang.IllegalStateException
 
 @Composable
 fun rememberMapViewWithLifecycle(): MapView {

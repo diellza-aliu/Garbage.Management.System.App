@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp.user_screen.my_complaints
+package com.example.garbagemanagementsystemapp.data_classes
 
 data class ComplaintsModel(
     val binId: String,

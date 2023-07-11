@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp.admin_screen.user_details
+package com.example.garbagemanagementsystemapp.data_classes
 
 data class UserModel (
     var email: String,

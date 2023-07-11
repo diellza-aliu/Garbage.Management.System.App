@@ -1,7 +1,7 @@
 package com.example.garbagemanagementsystemapp.admin_screen.view_all_drivers
 
 import androidx.compose.runtime.Composable
-import com.example.garbagemanagementsystemapp.admin_screen.create_driver.DriverModel
+import com.example.garbagemanagementsystemapp.data_classes.DriverModel
 
 
 @Composable
@@ -12,5 +12,5 @@ fun ViewAllDriversScreen(
     ViewAllDriversContent(
         viewAllDriversModel = viewAllDriversModel,
 
-    )
+        )
 }

@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyProfileViewModel @Inject constructor(
-    private val repository : AuthRepository
-): ViewModel() {
+    private val repository: AuthRepository
+) : ViewModel() {
 
-    fun updateProfile(name : String, fullName : String, email : String) = viewModelScope.launch {
+    fun updateProfile(name: String, fullName: String, email: String) = viewModelScope.launch {
         repository.updateProfile(name, fullName, email)
     }
 }

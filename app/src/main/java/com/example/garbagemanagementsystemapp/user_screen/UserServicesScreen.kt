@@ -2,8 +2,6 @@ package com.example.garbagemanagementsystemapp
 
 import android.content.Intent
 import android.provider.Settings
-import android.util.Log
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,7 +32,9 @@ import com.example.garbagemanagementsystemapp.data_classes.UserViewPair
 import com.example.garbagemanagementsystemapp.ui.theme.composables.DrawerBody
 import com.example.garbagemanagementsystemapp.ui.theme.composables.DrawerHeader
 import com.example.garbagemanagementsystemapp.ui.theme.composables.userServicesRecyclerView
-import com.example.garbagemanagementsystemapp.user_screen.*
+import com.example.garbagemanagementsystemapp.user_screen.MyComplaint
+import com.example.garbagemanagementsystemapp.user_screen.RegisterComplaintScreen
+import com.example.garbagemanagementsystemapp.user_screen.UserServicesViewModel
 import com.example.garbagemanagementsystemapp.user_screen.my_profile.MyProfileScreen
 import com.example.garbagemanagementsystemapp.user_screen.update_bin.UpdateBinScreen
 import kotlinx.coroutines.launch
@@ -45,7 +45,8 @@ import kotlinx.coroutines.launch
 @ExperimentalComposeUiApi
 fun UserServicesScreen(
     viewModel: UserServicesViewModel = hiltViewModel(),
-    navController: NavController) {
+    navController: NavController
+) {
 
 
     var selectedItem = remember { mutableStateOf<MenuItem?>(MenuItem("", "", "", null)) }
@@ -136,7 +137,8 @@ fun UserServicesScreen(
                                 title = stringResource(R.string.Update_bin),
                                 contentDescription = "Go to settings screen",
                                 icon = Icons.Default.Update
-                            ),MenuItem(
+                            ),
+                            MenuItem(
                                 id = "Language",
                                 title = stringResource(R.string.Language),
                                 contentDescription = "Language",
@@ -260,8 +262,8 @@ fun UserServicesScreen(
                                     painterResource(id = R.drawable.my_profile)
                                 )
                             ), onItemClick = {
-                                when(it.name){
-                                    "Register Complaint","Regjistro ankesën" -> {
+                                when (it.name) {
+                                    "Register Complaint", "Regjistro ankesën" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Register Complaint",
                                             title = "Register Complaint",
@@ -276,7 +278,7 @@ fun UserServicesScreen(
                                             }
                                         }
                                     }
-                                    "My Complaint", "Ankesa ime" ->{
+                                    "My Complaint", "Ankesa ime" -> {
                                         selectedItem.value = MenuItem(
                                             id = "My Complaint",
                                             title = "My Complaint",
@@ -291,7 +293,7 @@ fun UserServicesScreen(
                                             }
                                         }
                                     }
-                                    "Update bin's status", "Përditëso statusin e koshit të plehrave" ->{
+                                    "Update bin's status", "Përditëso statusin e koshit të plehrave" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Update bin's status",
                                             title = "Update bin's status",
@@ -306,7 +308,7 @@ fun UserServicesScreen(
                                             }
                                         }
                                     }
-                                    "My profile","Profili im" ->{
+                                    "My profile", "Profili im" -> {
                                         selectedItem.value = MenuItem(
                                             id = "My profile",
                                             title = "My profile",

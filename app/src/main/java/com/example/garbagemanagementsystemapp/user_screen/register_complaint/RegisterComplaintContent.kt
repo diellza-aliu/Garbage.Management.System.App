@@ -2,7 +2,6 @@ package com.example.garbagemanagementsystemapp.user_screen
 
 import android.location.Address
 import android.location.Geocoder
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -37,12 +36,14 @@ import java.util.*
 @Composable
 fun RegisterComplaintContent(
     viewModel: RegisterViewModel = hiltViewModel(),
-    navController : NavController,
-    registerBin: (binId: String,
-                   city: String,
-                   location: String,
-                   loadType: String,
-                   status: String) -> Unit
+    navController: NavController,
+    registerBin: (
+        binId: String,
+        city: String,
+        location: String,
+        loadType: String,
+        status: String
+    ) -> Unit
 
 ) {
     var binId by rememberSaveable { mutableStateOf("") }
@@ -73,11 +74,32 @@ fun RegisterComplaintContent(
 
 
     Column {
-        defineText(text = stringResource(R.string.Bin_Id), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
-        CustomTextField(value = binId, onValueChange = {binId = it})
-        defineText(text = stringResource(id =R.string.City), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
-        CustomTextField(value = city, onValueChange = {city = it})
-        defineText(text = stringResource(id = R.string.Location), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        defineText(
+            text = stringResource(R.string.Bin_Id),
+            start = 20.dp,
+            top = 8.dp,
+            end = 0.dp,
+            bottom = 0.dp,
+            fraction = 1f
+        )
+        CustomTextField(value = binId, onValueChange = { binId = it })
+        defineText(
+            text = stringResource(id = R.string.City),
+            start = 20.dp,
+            top = 8.dp,
+            end = 0.dp,
+            bottom = 0.dp,
+            fraction = 1f
+        )
+        CustomTextField(value = city, onValueChange = { city = it })
+        defineText(
+            text = stringResource(id = R.string.Location),
+            start = 20.dp,
+            top = 8.dp,
+            end = 0.dp,
+            bottom = 0.dp,
+            fraction = 1f
+        )
 
         if (latlng == null) {
             OutlinedButton(
@@ -100,14 +122,18 @@ fun RegisterComplaintContent(
                 shape = RoundedCornerShape(12.dp)
             )
             {
-                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(
                         imageVector = Icons.Default.LocationOn,
                         contentDescription = "Location",
                         tint = Color(112, 145, 98),
                         modifier = Modifier.padding(start = 5.dp)
                     )
-                    Text(text = "Bin location",
+                    Text(
+                        text = "Bin location",
                         color = Color.Black,
                         fontSize = 18.sp,
                         fontStyle = FontStyle.Italic,
@@ -136,7 +162,8 @@ fun RegisterComplaintContent(
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.Transparent,
-                    disabledBackgroundColor = Color.Transparent)
+                    disabledBackgroundColor = Color.Transparent
+                )
 
             )
             {
@@ -164,10 +191,24 @@ fun RegisterComplaintContent(
             }
         }
 
-        defineText(text = stringResource(id = R.string.Load_Type), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        defineText(
+            text = stringResource(id = R.string.Load_Type),
+            start = 20.dp,
+            top = 8.dp,
+            end = 0.dp,
+            bottom = 0.dp,
+            fraction = 1f
+        )
         val loadType = dropDownMenu(loadTypeList)
-        defineText(text = stringResource(id = R.string.Status), start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
-        val status = dropDownMenu(list =statusList)
+        defineText(
+            text = stringResource(id = R.string.Status),
+            start = 20.dp,
+            top = 8.dp,
+            end = 0.dp,
+            bottom = 0.dp,
+            fraction = 1f
+        )
+        val status = dropDownMenu(list = statusList)
         Button(
             onClick = {
                 registerBin(binId, city, getAddressFromCoordinates(latlng) ?: "", loadType, status)
@@ -176,8 +217,11 @@ fun RegisterComplaintContent(
                 .padding(horizontal = 16.dp)
                 .padding(top = 10.dp)
                 .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(112, 145, 98), contentColor = Color.White)
-        ){
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(112, 145, 98),
+                contentColor = Color.White
+            )
+        ) {
             Text(text = stringResource(R.string.Submit), fontSize = 20.sp)
         }
     }
@@ -186,7 +230,8 @@ fun RegisterComplaintContent(
 fun getAddressFromCoordinates(latLng: LatLng?): String? {
     val geocoder = Geocoder(ApplicationFirebaseAuth.context, Locale.getDefault())
     if (latLng != null) {
-        val addresses: List<Address?> = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1) as List<Address>
+        val addresses: List<Address?> =
+            geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1) as List<Address>
         return if (addresses.isEmpty()) {
             ""
         } else {

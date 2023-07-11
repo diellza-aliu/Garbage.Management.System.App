@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UpdateBinViewModel @Inject constructor(
-    private val repository : AuthRepository
-): ViewModel() {
+    private val repository: AuthRepository
+) : ViewModel() {
 
     fun updateBin(
         binId: String,

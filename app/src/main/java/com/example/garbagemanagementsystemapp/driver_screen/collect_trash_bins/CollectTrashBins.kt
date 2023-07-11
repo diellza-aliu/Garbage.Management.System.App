@@ -20,11 +20,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.garbagemanagementsystemapp.user_screen.my_complaints.ComplaintsModel
+import com.example.garbagemanagementsystemapp.data_classes.ComplaintsModel
 
 @Composable
 fun CollectTrashBins(
-    myComplaints: MutableList<ComplaintsModel>) {
+    myComplaints: MutableList<ComplaintsModel>
+) {
     val context = LocalContext.current
     Column(
         modifier = Modifier
@@ -103,17 +104,23 @@ fun openBinLocation(
                         Text(
                             text = "${myComplaint.location}",
                             fontSize = 16.sp,
-                            modifier = Modifier.padding(start = 8.dp).weight(1f)
+                            modifier = Modifier
+                                .padding(start = 8.dp)
+                                .weight(1f)
                         )
                         Button(
-                            onClick = { expanded = true
-                                navigateToLocation(myComplaint.location, context)},
+                            onClick = {
+                                expanded = true
+                                navigateToLocation(myComplaint.location, context)
+                            },
                             colors = ButtonDefaults.buttonColors(
                                 backgroundColor = Color(112, 145, 98),
                                 contentColor = Color.White
                             ),
                             shape = RoundedCornerShape(4.dp),
-                            modifier = Modifier.padding(start = 0.dp).wrapContentWidth()
+                            modifier = Modifier
+                                .padding(start = 0.dp)
+                                .wrapContentWidth()
                         ) {
                             Text(text = "Open")
                         }

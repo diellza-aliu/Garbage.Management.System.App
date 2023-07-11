@@ -9,18 +9,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.garbagemanagementsystemapp.AdminScreen
 import com.example.garbagemanagementsystemapp.DriverScreen
 import com.example.garbagemanagementsystemapp.MainActivity
 import com.example.garbagemanagementsystemapp.UserServicesScreen
+import com.example.garbagemanagementsystemapp.admin_screen.AdminLoginScreen
+import com.example.garbagemanagementsystemapp.admin_screen.AdminScreen
 import com.example.garbagemanagementsystemapp.home_screen.HomeScreen
-import com.example.garbagemanagementsystemapp.login_screen.AdminLoginScreen
 import com.example.garbagemanagementsystemapp.login_screen.DriverLoginScreen
 import com.example.garbagemanagementsystemapp.login_screen.LoginFormScreen
 import com.example.garbagemanagementsystemapp.maps.BinLocationMap
 import com.example.garbagemanagementsystemapp.register_screen.RegisterScreen
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class,
+@OptIn(
+    ExperimentalAnimationApi::class, ExperimentalFoundationApi::class,
     ExperimentalComposeUiApi::class
 )
 @Composable
@@ -68,7 +69,7 @@ fun NavigationGraph(
                 }
             )
         }
-        composable(route = Screens.RegisterScreen.route){
+        composable(route = Screens.RegisterScreen.route) {
             RegisterScreen(
                 navigateBack = {
                     navController.popBackStack()
@@ -77,7 +78,7 @@ fun NavigationGraph(
         }
 
         composable(route = Screens.UserServicesScreen.route) {
-            UserServicesScreen( navController = navController)
+            UserServicesScreen(navController = navController)
         }
 
         composable(route = Screens.AdminScreen.route) {
@@ -92,7 +93,7 @@ fun NavigationGraph(
             MainActivity()
         }
 
-        composable(route = Screens.MapScreen.route){
+        composable(route = Screens.MapScreen.route) {
             BinLocationMap(navController = navController)
         }
 

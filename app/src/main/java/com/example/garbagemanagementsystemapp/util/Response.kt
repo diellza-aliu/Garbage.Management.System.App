@@ -1,13 +1,13 @@
 package com.example.garbagemanagementsystemapp.util
 
-sealed class Response<out T>{
-    object Loading: Response<Nothing>()
+sealed class Response<out T> {
+    object Loading : Response<Nothing>()
 
     data class Success<out T>(
         val data: T
-    ): Response<T>()
+    ) : Response<T>()
 
     data class Error(
         val e: Exception
-    ): Response<Nothing>()
+    ) : Response<Nothing>()
 }

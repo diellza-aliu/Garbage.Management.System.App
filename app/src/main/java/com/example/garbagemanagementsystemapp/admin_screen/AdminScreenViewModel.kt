@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AdminScreenViewModel @Inject constructor(
     private val repo: AuthRepository
-): ViewModel() {
+) : ViewModel() {
 
     var signUpResponse by mutableStateOf<SignUpResponse>(Response.Success(false))
         private set
@@ -26,7 +26,13 @@ class AdminScreenViewModel @Inject constructor(
     val viewAllDrivers = repo.fetchAllDrivers()
     val viewAllUsers = repo.fetchAllUsers()
 
-    fun createDriver(email: String, password : String, fullName: String, name: String, type: String) = viewModelScope.launch {
+    fun createDriver(
+        email: String,
+        password: String,
+        fullName: String,
+        name: String,
+        type: String
+    ) = viewModelScope.launch {
         signUpResponse = Response.Loading
         signUpResponse = repo.createDriver(email, password, fullName, name, type)
     }

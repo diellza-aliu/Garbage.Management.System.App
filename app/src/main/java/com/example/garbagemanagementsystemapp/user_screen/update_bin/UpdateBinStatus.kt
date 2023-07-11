@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.garbagemanagementsystemapp.R
-import com.example.garbagemanagementsystemapp.user_screen.my_complaints.ComplaintsModel
+import com.example.garbagemanagementsystemapp.data_classes.ComplaintsModel
 
 enum class BinStatus {
     New,
@@ -68,7 +68,7 @@ fun updateBinsStatusRecyclerView(
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Bin_Id)+ " : ${myComplaint.binId}",
+                            text = stringResource(id = R.string.Bin_Id) + " : ${myComplaint.binId}",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(start = 8.dp)
@@ -87,7 +87,7 @@ fun updateBinsStatusRecyclerView(
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Status)+ " : ${myComplaint.status}",
+                            text = stringResource(id = R.string.Status) + " : ${myComplaint.status}",
                             fontSize = 16.sp,
                             modifier = Modifier
                                 .padding(start = 8.dp)
@@ -117,7 +117,7 @@ fun updateBinsStatusRecyclerView(
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Location)+ " : ${myComplaint.location}",
+                            text = stringResource(id = R.string.Location) + " : ${myComplaint.location}",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(start = 8.dp)
                         )
@@ -134,7 +134,7 @@ fun updateBinsStatusRecyclerView(
                         DropdownMenuItem(
                             onClick = {
                                 selectedStatus = status.name
-                                updateBin(myComplaint.binId , selectedStatus)
+                                updateBin(myComplaint.binId, selectedStatus)
                                 expanded = false
                             }
                         ) {

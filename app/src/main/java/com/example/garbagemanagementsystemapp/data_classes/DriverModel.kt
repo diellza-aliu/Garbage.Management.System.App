@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp.admin_screen.create_driver
+package com.example.garbagemanagementsystemapp.data_classes
 
 data class DriverModel(
     var email : String,

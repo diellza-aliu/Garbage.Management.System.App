@@ -1,8 +1,7 @@
-package com.example.garbagemanagementsystemapp.admin_screen
+package com.example.garbagemanagementsystemapp.admin_screen.create_driver
 
 import android.util.Patterns
 import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
@@ -10,7 +9,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.PermIdentity
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -21,11 +19,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.garbagemanagementsystemapp.R
@@ -36,7 +32,8 @@ import com.example.garbagemanagementsystemapp.ui.theme.composables.dropDownMenu
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CreateDriverContent(
-    createDriver: (email: String, password : String, fullName: String, name: String, type: String) -> Unit){
+    createDriver: (email: String, password: String, fullName: String, name: String, type: String) -> Unit
+) {
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -59,20 +56,19 @@ fun CreateDriverContent(
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val scrollState = rememberScrollState()
-    val scope = rememberCoroutineScope()
 
     var validateName by rememberSaveable { mutableStateOf(true) }
-    var validateFullName by rememberSaveable { mutableStateOf(true) }
+    val validateFullName by rememberSaveable { mutableStateOf(true) }
     var validateEmail by rememberSaveable { mutableStateOf(true) }
     var validatePassword by rememberSaveable { mutableStateOf(true) }
     var isPasswordVisible by rememberSaveable { mutableStateOf(false) }
 
     val validateNameError = stringResource(R.string.Name_error)
     val validateEmailError = stringResource(R.string.Email_error)
-    val validatePasswordError  = stringResource(R.string.Password_error)
+    val validatePasswordError = stringResource(R.string.Password_error)
 
-    fun validateData(email: String, password : String, name: String) : Boolean {
-        val passwordRegex =  "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&*+=]).{8,}".toRegex()
+    fun validateData(email: String, password: String, name: String): Boolean {
+        val passwordRegex = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&*+=]).{8,}".toRegex()
 
         validateName = name.isNotBlank()
         validateEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -80,11 +76,11 @@ fun CreateDriverContent(
 
         return validateName && validateFullName && validateEmail && validatePassword
     }
-    fun register (email: String, password : String, fullName: String, name: String, type: String){
-        if(validateData(email, password, name)){
+
+    fun register(email: String, password: String, fullName: String, name: String, type: String) {
+        if (validateData(email, password, name)) {
             createDriver(email, password, fullName, name, type)
-        }
-        else{
+        } else {
             Toast.makeText(context, "Please, review fields!!!", Toast.LENGTH_LONG).show()
         }
     }
@@ -108,7 +104,7 @@ fun CreateDriverContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -125,7 +121,7 @@ fun CreateDriverContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -137,7 +133,7 @@ fun CreateDriverContent(
             errorMessage = validatePasswordError,
             isPasswordField = true,
             iSPasswordVisible = isPasswordVisible,
-            onVisibilityChange = { isPasswordVisible = it},
+            onVisibilityChange = { isPasswordVisible = it },
             leadingIconImageVector = Icons.Default.PermIdentity,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Words,
@@ -145,10 +141,17 @@ fun CreateDriverContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
-        defineText(text = "Type", start = 20.dp, top = 8.dp, end = 0.dp, bottom = 0.dp, fraction = 1f)
+        defineText(
+            text = "Type",
+            start = 20.dp,
+            top = 8.dp,
+            end = 0.dp,
+            bottom = 0.dp,
+            fraction = 1f
+        )
         val type = dropDownMenu(typeList)
         Button(
             onClick = {
@@ -157,8 +160,11 @@ fun CreateDriverContent(
             modifier = Modifier
                 .padding(20.dp)
                 .fillMaxWidth(0.9f),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(112, 145, 98), contentColor = Color.White)
-        ){
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(112, 145, 98),
+                contentColor = Color.White
+            )
+        ) {
             Text(text = stringResource(R.string.Register), fontSize = 20.sp)
         }
     }

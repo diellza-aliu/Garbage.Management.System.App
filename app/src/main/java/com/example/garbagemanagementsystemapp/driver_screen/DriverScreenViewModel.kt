@@ -8,7 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DriverScreenViewModel @Inject constructor(
     private val repo: AuthRepository
-): ViewModel() {
+) : ViewModel() {
 
     fun signOut() = repo.signOut()
     val userInfo = repo.retrieveData()

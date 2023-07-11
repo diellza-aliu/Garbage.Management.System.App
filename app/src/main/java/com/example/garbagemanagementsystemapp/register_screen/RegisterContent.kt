@@ -1,6 +1,5 @@
 package com.example.garbagemanagementsystemapp.register_screen
 
-import android.text.method.TextKeyListener
 import android.util.Patterns
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -37,14 +36,16 @@ import com.example.garbagemanagementsystemapp.ui.theme.composables.CustomOutline
 
 @Composable
 fun RegisterContent(
-    registerUser: (name: String,
-               surname: String,
-               email: String,
-               phone: String,
-               password: String,
-               confirmPassword: String) -> Unit,
+    registerUser: (
+        name: String,
+        surname: String,
+        email: String,
+        phone: String,
+        password: String,
+        confirmPassword: String
+    ) -> Unit,
     navigateBack: () -> Unit
-){
+) {
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val scrollState = rememberScrollState()
@@ -70,11 +71,18 @@ fun RegisterContent(
     val validateSurnameError = stringResource(R.string.Surname_error)
     val validateEmailError = stringResource(R.string.Email_error)
     val validatePhoneError = stringResource(R.string.Phone_error)
-    val validatePasswordError  = stringResource(R.string.Password_error)
+    val validatePasswordError = stringResource(R.string.Password_error)
     val validateEqualPasswordError = stringResource(R.string.Equal_password_error)
 
-    fun validateData(name : String, surname : String, email : String, phone : String, password : String, confirmPassword : String) : Boolean {
-        val passwordRegex =  "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&*+=]).{8,}".toRegex()
+    fun validateData(
+        name: String,
+        surname: String,
+        email: String,
+        phone: String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
+        val passwordRegex = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&*+=]).{8,}".toRegex()
 
         validateName = name.isNotBlank()
         validateSurname = surname.isNotBlank()
@@ -85,18 +93,18 @@ fun RegisterContent(
 
         return validateName && validateSurname && validateEmail && validatePhone && validatePassword && validateConfirmPassword && validateArePasswordsEqual
     }
-    fun register (
+
+    fun register(
         name: String,
         surname: String,
         email: String,
         phone: String,
         password: String,
         confirmPassword: String
-    ){
-        if(validateData(name, surname, email, phone, password, confirmPassword)){
+    ) {
+        if (validateData(name, surname, email, phone, password, confirmPassword)) {
             registerUser(name, surname, email, phone, password, confirmPassword)
-        }
-        else{
+        } else {
             Toast.makeText(context, "Please, review fields!!!", Toast.LENGTH_LONG).show()
         }
     }
@@ -127,7 +135,7 @@ fun RegisterContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -144,7 +152,7 @@ fun RegisterContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -161,7 +169,7 @@ fun RegisterContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -178,7 +186,7 @@ fun RegisterContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -190,7 +198,7 @@ fun RegisterContent(
             errorMessage = validatePasswordError,
             isPasswordField = true,
             iSPasswordVisible = isPasswordVisible,
-            onVisibilityChange = { isPasswordVisible = it},
+            onVisibilityChange = { isPasswordVisible = it },
             leadingIconImageVector = Icons.Default.PermIdentity,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Words,
@@ -198,7 +206,7 @@ fun RegisterContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -207,10 +215,10 @@ fun RegisterContent(
             onValueChange = { confirmPassword = it },
             label = stringResource(R.string.Confirm_password),
             showError = !validateConfirmPassword || !validateArePasswordsEqual,
-            errorMessage = if(!validateConfirmPassword) validatePasswordError else validateEqualPasswordError,
+            errorMessage = if (!validateConfirmPassword) validatePasswordError else validateEqualPasswordError,
             isPasswordField = true,
             iSPasswordVisible = isConfirmPasswordVisible,
-            onVisibilityChange = { isConfirmPasswordVisible = it},
+            onVisibilityChange = { isConfirmPasswordVisible = it },
             leadingIconImageVector = Icons.Default.Password,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Words,
@@ -218,7 +226,7 @@ fun RegisterContent(
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { focusManager.clearFocus()}
+                onDone = { focusManager.clearFocus() }
             )
         )
 
@@ -229,8 +237,11 @@ fun RegisterContent(
             modifier = Modifier
                 .padding(20.dp)
                 .fillMaxWidth(0.9f),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(112, 145, 98), contentColor = Color.White)
-        ){
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(112, 145, 98),
+                contentColor = Color.White
+            )
+        ) {
             Text(text = stringResource(R.string.Register), fontSize = 20.sp)
         }
         Text(

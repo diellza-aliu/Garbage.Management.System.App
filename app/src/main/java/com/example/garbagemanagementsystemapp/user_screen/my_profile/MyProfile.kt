@@ -20,11 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.garbagemanagementsystemapp.R
+import com.example.garbagemanagementsystemapp.data_classes.MyProfileModel
 
 @Composable
 fun MyProfile(
     myProfileModel: MyProfileModel,
-    updateProfile: (name : String, fullName : String, email : String) -> Unit
+    updateProfile: (name: String, fullName: String, email: String) -> Unit
 ) {
     var name by remember { mutableStateOf(myProfileModel.name) }
     var fullName by remember { mutableStateOf(myProfileModel.fullName) }

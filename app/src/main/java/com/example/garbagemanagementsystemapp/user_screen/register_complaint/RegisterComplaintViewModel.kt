@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterComplaintViewModel @Inject constructor(
-    private val repository : AuthRepository
-): ViewModel() {
+    private val repository: AuthRepository
+) : ViewModel() {
 
     fun registerBin(
         binId: String,

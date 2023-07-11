@@ -17,8 +17,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.ktx.awaitMap
-import java.util.*
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Composable
 fun BinLocationMap(
@@ -27,12 +27,13 @@ fun BinLocationMap(
     val mapView = rememberMapViewWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Black)
-        .padding(bottom = 36.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+            .padding(bottom = 36.dp)
     ) {
-        AndroidView({mapView}) { mapView ->
+        AndroidView({ mapView }) { mapView ->
             coroutineScope.launch {
                 val map = mapView.awaitMap()
                 map.uiSettings.isZoomControlsEnabled = true

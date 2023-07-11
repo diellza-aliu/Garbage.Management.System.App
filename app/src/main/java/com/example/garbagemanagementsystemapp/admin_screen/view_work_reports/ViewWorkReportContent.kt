@@ -22,12 +22,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.garbagemanagementsystemapp.user_screen.my_complaints.ComplaintsModel
+import com.example.garbagemanagementsystemapp.data_classes.ComplaintsModel
 
 @Composable
-fun ViewWorkReportContent (
-    viewAllDoneWork : MutableList<ComplaintsModel>
-){
+fun ViewWorkReportContent(
+    viewAllDoneWork: MutableList<ComplaintsModel>
+) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -47,7 +47,7 @@ fun viewAllDoneWork(allDoneWork: MutableList<ComplaintsModel>) {
     Log.d("Diellzaa", "viewAllDoneWork: $allDoneWork $doneWork")
 
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
-        items(items = doneWork,) { doneWork ->
+        items(items = doneWork) { doneWork ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()

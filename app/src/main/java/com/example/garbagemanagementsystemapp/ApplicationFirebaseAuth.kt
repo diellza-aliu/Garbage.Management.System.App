@@ -11,8 +11,8 @@ class ApplicationFirebaseAuth : Application() {
         context = this
     }
 
-companion object{
+    companion object {
         lateinit var context: ApplicationFirebaseAuth
-}
+    }
 
 }

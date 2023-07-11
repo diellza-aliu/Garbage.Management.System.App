@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -24,7 +23,7 @@ import com.example.garbagemanagementsystemapp.R
 import com.example.garbagemanagementsystemapp.data_classes.MenuItem
 
 @Composable
-fun DrawerHeader(userFullName: String, email : String) {
+fun DrawerHeader(userFullName: String, email: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,9 +34,23 @@ fun DrawerHeader(userFullName: String, email : String) {
         Column(
         ) {
             val drawable =
-            Image(painter = painterResource(id = R.drawable.profile), contentDescription = "ProfilePic")
-            Text(text = userFullName, textAlign = TextAlign.Start, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 30.dp))
-            Text(text = email, textAlign = TextAlign.Start, fontWeight = FontWeight.Light, color = Color.Gray, modifier = Modifier.padding(bottom = 30.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.profile),
+                    contentDescription = "ProfilePic"
+                )
+            Text(
+                text = userFullName,
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 30.dp)
+            )
+            Text(
+                text = email,
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Light,
+                color = Color.Gray,
+                modifier = Modifier.padding(bottom = 30.dp)
+            )
         }
     }
 }
@@ -59,7 +72,7 @@ fun DrawerBody(
                     }
                     .padding(16.dp)
             ) {
-                if(item.icon != null){
+                if (item.icon != null) {
                     Icon(
                         imageVector = item.icon,
                         contentDescription = item.contentDescription

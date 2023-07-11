@@ -10,7 +10,7 @@ fun RegisterScreen(
 ) {
     RegisterContent(
         registerUser = { name, surname, email, phone, password, confirmPassword ->
-                   viewModel.registerUser(name, surname, email, phone, password, confirmPassword)
+            viewModel.registerUser(name, surname, email, phone, password, confirmPassword)
         },
         navigateBack = navigateBack
     )

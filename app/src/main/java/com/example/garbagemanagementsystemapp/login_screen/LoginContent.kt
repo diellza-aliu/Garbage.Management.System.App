@@ -15,8 +15,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PermIdentity
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -38,11 +41,11 @@ import com.example.garbagemanagementsystemapp.ui.theme.composables.CustomOutline
 @Composable
 fun LoginContent(
     logIn: (email: String, password: String) -> Unit,
-    navigateToSignUpScreen: () -> Unit){
+    navigateToSignUpScreen: () -> Unit
+) {
 
     val focusManager = LocalFocusManager.current
     val scrollState = rememberScrollState()
-    val scope = rememberCoroutineScope()
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -51,10 +54,10 @@ fun LoginContent(
     var isPasswordVisible by rememberSaveable { mutableStateOf(false) }
 
     val validateEmailError = stringResource(R.string.Email_error)
-    val validatePasswordError  = stringResource(R.string.Password_error)
+    val validatePasswordError = stringResource(R.string.Password_error)
 
-    fun validateData(email : String, password : String) : Boolean {
-        val passwordRegex =  "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&*+=]).{8,}".toRegex()
+    fun validateData(email: String, password: String): Boolean {
+        val passwordRegex = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&*+=]).{8,}".toRegex()
 
         validateEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         validatePassword = passwordRegex.matches(password)
@@ -74,7 +77,8 @@ fun LoginContent(
             modifier = Modifier.padding(vertical = 20.dp),
             color = Color(112, 145, 98)
         )
-        Image(painter = painterResource(id = R.drawable.login_logo_foreground),
+        Image(
+            painter = painterResource(id = R.drawable.login_logo_foreground),
             contentDescription = "Login Logo",
             modifier = Modifier
                 .size(180.dp)
@@ -93,7 +97,7 @@ fun LoginContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
@@ -105,7 +109,7 @@ fun LoginContent(
             errorMessage = validatePasswordError,
             isPasswordField = true,
             iSPasswordVisible = isPasswordVisible,
-            onVisibilityChange = { isPasswordVisible = it},
+            onVisibilityChange = { isPasswordVisible = it },
             leadingIconImageVector = Icons.Default.PermIdentity,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Words,
@@ -113,27 +117,34 @@ fun LoginContent(
                 imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Down)}
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
             )
         )
 
         Button(
             onClick = {
-                if(validateData(email, password)){
+                if (validateData(email, password)) {
                     logIn(email, password)
-                }else{
-                    Toast.makeText(ApplicationFirebaseAuth.context, "Something went wrong. Invalid email or password!", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        ApplicationFirebaseAuth.context,
+                        "Something went wrong. Invalid email or password!",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             },
             modifier = Modifier
                 .padding(20.dp)
                 .fillMaxWidth(0.9f),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(112, 145, 98), contentColor = Color.White)
-        ){
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(112, 145, 98),
+                contentColor = Color.White
+            )
+        ) {
             Text(text = stringResource(R.string.Login), fontSize = 20.sp)
         }
         Text(
-            text = stringResource(R.string.Already_have_account),
+            text = stringResource(R.string.Dont_you_have_an_account),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable {

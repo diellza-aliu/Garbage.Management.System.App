@@ -1,9 +1,9 @@
 package com.example.garbagemanagementsystemapp.data
 
-import com.example.garbagemanagementsystemapp.admin_screen.create_driver.DriverModel
-import com.example.garbagemanagementsystemapp.admin_screen.user_details.UserModel
-import com.example.garbagemanagementsystemapp.user_screen.my_complaints.ComplaintsModel
-import com.example.garbagemanagementsystemapp.user_screen.my_profile.MyProfileModel
+import com.example.garbagemanagementsystemapp.data_classes.DriverModel
+import com.example.garbagemanagementsystemapp.data_classes.UserModel
+import com.example.garbagemanagementsystemapp.data_classes.ComplaintsModel
+import com.example.garbagemanagementsystemapp.data_classes.MyProfileModel
 import com.example.garbagemanagementsystemapp.util.Response
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow

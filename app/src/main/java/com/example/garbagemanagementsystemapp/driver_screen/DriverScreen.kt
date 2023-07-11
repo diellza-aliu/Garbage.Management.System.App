@@ -2,7 +2,6 @@ package com.example.garbagemanagementsystemapp
 
 import android.content.Intent
 import android.provider.Settings
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -32,9 +30,6 @@ import com.example.garbagemanagementsystemapp.navigation.NavigationGraph
 import com.example.garbagemanagementsystemapp.ui.theme.composables.DrawerBody
 import com.example.garbagemanagementsystemapp.ui.theme.composables.DrawerHeader
 import com.example.garbagemanagementsystemapp.ui.theme.composables.userServicesRecyclerView
-import com.example.garbagemanagementsystemapp.user_screen.MyComplaint
-import com.example.garbagemanagementsystemapp.user_screen.RegisterComplaintScreen
-import com.example.garbagemanagementsystemapp.user_screen.UserServicesViewModel
 import com.example.garbagemanagementsystemapp.user_screen.my_profile.MyProfileScreen
 import com.example.garbagemanagementsystemapp.user_screen.update_bin.UpdateBinScreen
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -72,7 +67,8 @@ fun DriverScreen(viewModel: DriverScreenViewModel = hiltViewModel()) {
                     ) {
                         when (selectedItem.id) {
                             "Ready to collect trash bins" -> {
-                                CollectTrashBinScreen(myComplaints = viewModel.myComplaints)}
+                                CollectTrashBinScreen(myComplaints = viewModel.myComplaints)
+                            }
                             "Update bin's status" -> {
                                 UpdateBinScreen(
                                     myComplaints = viewModel.myComplaints
@@ -224,10 +220,20 @@ fun DriverScreen(viewModel: DriverScreenViewModel = hiltViewModel()) {
                                 .padding(0.dp, 20.dp)
                         ) {
                             userServicesRecyclerView(listOf(
-                                UserViewPair(stringResource(id = R.string.Collect_trash), painterResource(id = R.drawable.collect_bin)),
-                                UserViewPair(stringResource(id = R.string.Update_bin), painterResource(id = R.drawable.update_bin_status)),
-                                UserViewPair(stringResource(id = R.string.My_profile), painterResource(id = R.drawable.my_profile))), onItemClick = {
-                                when(it.name){
+                                UserViewPair(
+                                    stringResource(id = R.string.Collect_trash),
+                                    painterResource(id = R.drawable.collect_bin)
+                                ),
+                                UserViewPair(
+                                    stringResource(id = R.string.Update_bin),
+                                    painterResource(id = R.drawable.update_bin_status)
+                                ),
+                                UserViewPair(
+                                    stringResource(id = R.string.My_profile),
+                                    painterResource(id = R.drawable.my_profile)
+                                )
+                            ), onItemClick = {
+                                when (it.name) {
                                     "Ready to collect trash bins" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Ready to collect trash bins",
@@ -243,7 +249,7 @@ fun DriverScreen(viewModel: DriverScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "Update bin's status" ->{
+                                    "Update bin's status" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Update bin's status",
                                             title = "Update bin's status",
@@ -258,7 +264,7 @@ fun DriverScreen(viewModel: DriverScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "My profile" ->{
+                                    "My profile" -> {
                                         selectedItem.value = MenuItem(
                                             id = "My profile",
                                             title = "My profile",

@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,20 +28,25 @@ fun HomeContent(
     navigateToSignInScreen: () -> Unit,
     navigateToAdminLoginScreen: () -> Unit,
     navigateToDriverLoginScreen: () -> Unit
-){
+) {
     Column(
         modifier = Modifier.background(Color.White)
-    ){
+    ) {
         stickyHeader()
-        mainContent(navigateToSignInScreen, navigateToSignUpScreen, navigateToAdminLoginScreen, navigateToDriverLoginScreen)
+        mainContent(
+            navigateToSignInScreen,
+            navigateToSignUpScreen,
+            navigateToAdminLoginScreen,
+            navigateToDriverLoginScreen
+        )
         faqFooter()
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun stickyHeader(){
-    LazyColumn{
+fun stickyHeader() {
+    LazyColumn {
         stickyHeader {
             Image(
                 painter = painterResource(id = R.drawable.logo),
@@ -57,13 +61,18 @@ fun stickyHeader(){
 }
 
 @Composable
-fun mainContent(navigateToSignInScreen: () -> Unit, navigateToSignUpScreen: () -> Unit, navigateToAdminLoginScreen: () -> Unit, navigateToDriverLoginScreen: () -> Unit) {
-    Column (
+fun mainContent(
+    navigateToSignInScreen: () -> Unit,
+    navigateToSignUpScreen: () -> Unit,
+    navigateToAdminLoginScreen: () -> Unit,
+    navigateToDriverLoginScreen: () -> Unit
+) {
+    Column(
         modifier = Modifier
             .padding(20.dp, 0.dp, 20.dp, 20.dp)
             .clip(RoundedCornerShape(40.dp))
             .background(Color(229, 229, 229))
-    ){
+    ) {
         Row {
             Column(
                 modifier = Modifier.clickable {
@@ -95,7 +104,7 @@ fun mainContent(navigateToSignInScreen: () -> Unit, navigateToSignUpScreen: () -
             }
             Column(
                 Modifier.clickable {
-                        navigateToDriverLoginScreen()
+                    navigateToDriverLoginScreen()
                 }
             ) {
                 defineImage(R.mipmap.driver_foreground, "Driver Login", 30.dp, 40.dp, 0.dp, 10.dp)
@@ -106,8 +115,9 @@ fun mainContent(navigateToSignInScreen: () -> Unit, navigateToSignUpScreen: () -
 }
 
 @Composable
-fun defineImage(id: Int, contentDescription: String, start: Dp, top: Dp, end: Dp, bottom: Dp){
-    Image(painter = painterResource(id),
+fun defineImage(id: Int, contentDescription: String, start: Dp, top: Dp, end: Dp, bottom: Dp) {
+    Image(
+        painter = painterResource(id),
         contentDescription = contentDescription,
         modifier = Modifier
             .padding(start, top, end, bottom)
@@ -119,19 +129,21 @@ fun defineImage(id: Int, contentDescription: String, start: Dp, top: Dp, end: Dp
 }
 
 @Composable
-fun defineText(text: String, start: Dp, top: Dp, end: Dp, bottom: Dp, fraction: Float){
-    Text(text = text,
+fun defineText(text: String, start: Dp, top: Dp, end: Dp, bottom: Dp, fraction: Float) {
+    Text(
+        text = text,
         fontSize = 20.sp,
         modifier = Modifier
             .fillMaxWidth(fraction)
-            .padding(start, top, end, bottom))
+            .padding(start, top, end, bottom)
+    )
 }
 
 @Composable
-fun faqFooter(){
-    Column (
+fun faqFooter() {
+    Column(
         modifier = Modifier.background(Color.White)
-    ){
+    ) {
         Image(painter = painterResource(id = R.drawable.ic_baseline_language_24),
             contentDescription = "Driver Register",
             modifier = Modifier

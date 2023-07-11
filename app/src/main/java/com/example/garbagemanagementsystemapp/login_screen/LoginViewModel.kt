@@ -9,15 +9,13 @@ import com.example.garbagemanagementsystemapp.data.AuthRepository
 import com.example.garbagemanagementsystemapp.data.SignInResponse
 import com.example.garbagemanagementsystemapp.util.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val repository : AuthRepository
-): ViewModel() {
+    private val repository: AuthRepository
+) : ViewModel() {
     var signInResponse by mutableStateOf<SignInResponse>(Response.Success(false))
 
 

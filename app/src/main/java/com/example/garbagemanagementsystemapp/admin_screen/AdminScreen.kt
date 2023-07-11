@@ -1,4 +1,4 @@
-package com.example.garbagemanagementsystemapp
+package com.example.garbagemanagementsystemapp.admin_screen
 
 import android.content.Intent
 import android.provider.Settings
@@ -22,13 +22,15 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.garbagemanagementsystemapp.admin_screen.AdminScreenViewModel
-import com.example.garbagemanagementsystemapp.admin_screen.CreateDriverScreen
+import com.example.garbagemanagementsystemapp.ApplicationFirebaseAuth
+import com.example.garbagemanagementsystemapp.R
+import com.example.garbagemanagementsystemapp.admin_screen.create_driver.CreateDriverScreen
 import com.example.garbagemanagementsystemapp.admin_screen.user_details.UserDetailsContent
 import com.example.garbagemanagementsystemapp.admin_screen.view_all_drivers.ViewAllDriversScreen
 import com.example.garbagemanagementsystemapp.admin_screen.view_work_reports.ViewWorkReportContent
 import com.example.garbagemanagementsystemapp.data_classes.MenuItem
 import com.example.garbagemanagementsystemapp.data_classes.UserViewPair
+import com.example.garbagemanagementsystemapp.headerView
 import com.example.garbagemanagementsystemapp.navigation.NavigationGraph
 import com.example.garbagemanagementsystemapp.ui.theme.composables.DrawerBody
 import com.example.garbagemanagementsystemapp.ui.theme.composables.DrawerHeader
@@ -102,14 +104,14 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
             },
             sheetBackgroundColor = Color(229, 229, 229),
             sheetPeekHeight = 0.dp,
-        ){
+        ) {
             val scope = rememberCoroutineScope()
 
             val scaffoldState = rememberScaffoldState()
             Scaffold(
                 scaffoldState = scaffoldState,
                 topBar = {
-                    AppBar(
+                    com.example.garbagemanagementsystemapp.AppBar(
                         onNavigationIconClick = {
                             scope.launch {
                                 scaffoldState.drawerState.open()
@@ -180,10 +182,12 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                             ),
                         ),
                         onItemClick = {
-                            when(it.id) {
-                                "Home" -> {  scope.launch {
-                                    scaffoldState.drawerState.close()
-                                }}
+                            when (it.id) {
+                                "Home" -> {
+                                    scope.launch {
+                                        scaffoldState.drawerState.close()
+                                    }
+                                }
                                 "Create bin" -> {
                                     selectedItem.value = MenuItem(
                                         id = "Create bin",
@@ -296,7 +300,8 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                         scaffoldState.drawerState.close()
                                     }
                                 }
-                                "Language" -> {val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                                "Language" -> {
+                                    val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     ContextCompat.startActivity(
                                         ApplicationFirebaseAuth.context,
@@ -309,22 +314,44 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                         }
                     )
                 },
-                content = {padding ->
-                    Column{
+                content = { padding ->
+                    Column {
                         headerView()
-                        Column(modifier = Modifier
-                            .padding(0.dp, 20.dp)
+                        Column(
+                            modifier = Modifier
+                                .padding(0.dp, 20.dp)
                         ) {
                             userServicesRecyclerView(listOf(
-                                UserViewPair(stringResource(R.string.Create_bin), painterResource(id = R.drawable.create_bin)),
-                                UserViewPair(stringResource(R.string.Update_bin), painterResource(id = R.drawable.update_bin_status)),
-                                UserViewPair(stringResource(R.string.Create_driver), painterResource(id = R.drawable.create_driver)),
-                                UserViewPair(stringResource(R.string.View_driver), painterResource(id = R.drawable.view_driver)),
-                                UserViewPair(stringResource(R.string.View_Work_Reports), painterResource(id = R.drawable.view_work_reports)),
-                                UserViewPair(stringResource(R.string.User_details), painterResource(id = R.drawable.user_details)),
-                                UserViewPair(stringResource(R.string.My_profile), painterResource(id = R.drawable.my_profile))
+                                UserViewPair(
+                                    stringResource(R.string.Create_bin),
+                                    painterResource(id = R.drawable.create_bin)
+                                ),
+                                UserViewPair(
+                                    stringResource(R.string.Update_bin),
+                                    painterResource(id = R.drawable.update_bin_status)
+                                ),
+                                UserViewPair(
+                                    stringResource(R.string.Create_driver),
+                                    painterResource(id = R.drawable.create_driver)
+                                ),
+                                UserViewPair(
+                                    stringResource(R.string.View_driver),
+                                    painterResource(id = R.drawable.view_driver)
+                                ),
+                                UserViewPair(
+                                    stringResource(R.string.View_Work_Reports),
+                                    painterResource(id = R.drawable.view_work_reports)
+                                ),
+                                UserViewPair(
+                                    stringResource(R.string.User_details),
+                                    painterResource(id = R.drawable.user_details)
+                                ),
+                                UserViewPair(
+                                    stringResource(R.string.My_profile),
+                                    painterResource(id = R.drawable.my_profile)
+                                )
                             ), onItemClick = {
-                                when(it.name){
+                                when (it.name) {
                                     "Create bin" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Create bin",
@@ -340,7 +367,7 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "Update bin's status" ->{
+                                    "Update bin's status" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Update bin's status",
                                             title = "Update bin's status",
@@ -355,7 +382,7 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "Create driver" ->{
+                                    "Create driver" -> {
                                         selectedItem.value = MenuItem(
                                             id = "Create driver",
                                             title = "Create driver",
@@ -370,7 +397,7 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "View driver" ->{
+                                    "View driver" -> {
                                         selectedItem.value = MenuItem(
                                             id = "View driver",
                                             title = "View driver",
@@ -385,7 +412,7 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "View work reports" ->{
+                                    "View work reports" -> {
                                         selectedItem.value = MenuItem(
                                             id = "View work reports",
                                             title = "View work reports",
@@ -400,7 +427,7 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "User details" ->{
+                                    "User details" -> {
                                         selectedItem.value = MenuItem(
                                             id = "User details",
                                             title = "User details",
@@ -415,7 +442,7 @@ fun AdminScreen(viewModel: AdminScreenViewModel = hiltViewModel()) {
                                             }
                                         }
                                     }
-                                    "My profile" ->{
+                                    "My profile" -> {
                                         selectedItem.value = MenuItem(
                                             id = "My profile",
                                             title = "My profile",

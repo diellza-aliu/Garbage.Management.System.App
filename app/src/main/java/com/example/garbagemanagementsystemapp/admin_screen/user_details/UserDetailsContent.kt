@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.garbagemanagementsystemapp.data_classes.UserModel
 
 @Composable
 fun UserDetailsContent(
@@ -36,10 +37,12 @@ fun UserDetailsContent(
 fun viewAllUsers(allUsers: MutableList<UserModel>) {
 
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
-        items(items = allUsers,) { user ->
+        items(items = allUsers) { user ->
 
             Card(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp),
                 elevation = 8.dp
             ) {
                 Column(

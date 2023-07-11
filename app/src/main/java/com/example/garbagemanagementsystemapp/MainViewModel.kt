@@ -10,7 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     val repository: AuthRepository
-): ViewModel() {
+) : ViewModel() {
     init {
         Log.d("Diellzaa", ": mainviwemodel")
         getAuthState()

@@ -1,9 +1,15 @@
 package com.example.garbagemanagementsystemapp.user_screen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.Info
@@ -17,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.garbagemanagementsystemapp.R
+import com.example.garbagemanagementsystemapp.data_classes.ComplaintsModel
 import com.example.garbagemanagementsystemapp.data_classes.UserViewPair
-import com.example.garbagemanagementsystemapp.user_screen.my_complaints.ComplaintsModel
 
 @Composable
 fun MyComplaint(myComplaints: MutableList<ComplaintsModel>) {
@@ -27,16 +33,19 @@ fun MyComplaint(myComplaints: MutableList<ComplaintsModel>) {
             .padding(16.dp)
             .fillMaxWidth()
     ) {
-        myComplaintsRecyclerView(myComplaints = myComplaints){}
+        myComplaintsRecyclerView(myComplaints = myComplaints) {}
 
     }
 }
 
 @Composable
-fun myComplaintsRecyclerView(myComplaints: MutableList<ComplaintsModel>, onItemClick: ((UserViewPair) -> Unit)?){
+fun myComplaintsRecyclerView(
+    myComplaints: MutableList<ComplaintsModel>,
+    onItemClick: ((UserViewPair) -> Unit)?
+) {
 
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
-        items(items = myComplaints,) { myComplaint ->
+        items(items = myComplaints) { myComplaint ->
 
             Card(
                 modifier = Modifier
@@ -57,7 +66,7 @@ fun myComplaintsRecyclerView(myComplaints: MutableList<ComplaintsModel>, onItemC
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Bin_Id)+ " : ${myComplaint.binId}",
+                            text = stringResource(id = R.string.Bin_Id) + " : ${myComplaint.binId}",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(start = 8.dp)
@@ -76,7 +85,7 @@ fun myComplaintsRecyclerView(myComplaints: MutableList<ComplaintsModel>, onItemC
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.City)+ " : ${myComplaint.city}",
+                            text = stringResource(id = R.string.City) + " : ${myComplaint.city}",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(start = 8.dp)
@@ -95,7 +104,7 @@ fun myComplaintsRecyclerView(myComplaints: MutableList<ComplaintsModel>, onItemC
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Status)+ " : ${myComplaint.status}",
+                            text = stringResource(id = R.string.Status) + " : ${myComplaint.status}",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(start = 8.dp)
                         )
@@ -113,7 +122,7 @@ fun myComplaintsRecyclerView(myComplaints: MutableList<ComplaintsModel>, onItemC
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Load_Type)+ " : ${myComplaint.loadType}",
+                            text = stringResource(id = R.string.Load_Type) + " : ${myComplaint.loadType}",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(start = 8.dp)
@@ -131,7 +140,7 @@ fun myComplaintsRecyclerView(myComplaints: MutableList<ComplaintsModel>, onItemC
                             tint = Color(112, 145, 98)
                         )
                         Text(
-                            text = stringResource(id = R.string.Location)+ " : ${myComplaint.location}",
+                            text = stringResource(id = R.string.Location) + " : ${myComplaint.location}",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(start = 8.dp)
                         )

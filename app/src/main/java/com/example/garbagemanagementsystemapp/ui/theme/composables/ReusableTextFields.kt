@@ -25,7 +25,10 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.*
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
@@ -57,7 +60,7 @@ fun CustomOutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 10.dp),
-            label = { Text(label)},
+            label = { Text(label) },
             leadingIcon = {
                 Icon(
                     imageVector = leadingIconImageVector,
@@ -67,9 +70,12 @@ fun CustomOutlinedTextField(
             },
             isError = showError,
             trailingIcon = {
-                if (showError && !isPasswordField) Icon(imageVector = Icons.Filled.Error, contentDescription = "Show error icon")
-                if(isPasswordField){
-                    IconButton(onClick = { onVisibilityChange(!iSPasswordVisible)}) {
+                if (showError && !isPasswordField) Icon(
+                    imageVector = Icons.Filled.Error,
+                    contentDescription = "Show error icon"
+                )
+                if (isPasswordField) {
+                    IconButton(onClick = { onVisibilityChange(!iSPasswordVisible) }) {
                         Icon(
                             imageVector = if (iSPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
                             contentDescription = "Toggle password visibility"
@@ -86,7 +92,7 @@ fun CustomOutlinedTextField(
             keyboardActions = keyboardActions,
             singleLine = true
         )
-        if (showError){
+        if (showError) {
             Text(
                 text = errorMessage,
                 color = MaterialTheme.colors.error,
@@ -101,7 +107,7 @@ fun CustomOutlinedTextField(
 }
 
 @Composable
-fun CustomTextField(value: String, onValueChange: ((String) -> Unit)){
+fun CustomTextField(value: String, onValueChange: ((String) -> Unit)) {
     TextField(
         value = value,
         onValueChange = { newValue -> onValueChange(newValue) },
@@ -185,8 +191,8 @@ fun EnumTextField(
 }
 
 @Composable
-fun dropDownMenu(list : List<String>): String {
-    var expanded by remember{ mutableStateOf(false)}
+fun dropDownMenu(list: List<String>): String {
+    var expanded by remember { mutableStateOf(false) }
     var selectedItem by remember {
         mutableStateOf("")
     }
@@ -194,12 +200,12 @@ fun dropDownMenu(list : List<String>): String {
         mutableStateOf(Size.Zero)
     }
 
-    var icon = if(expanded){
+    var icon = if (expanded) {
         Icons.Filled.KeyboardArrowUp
-    }else{
+    } else {
         Icons.Filled.KeyboardArrowDown
     }
-    
+
     Column() {
         TextField(
             value = selectedItem,
@@ -236,12 +242,13 @@ fun dropDownMenu(list : List<String>): String {
             readOnly = true,
             singleLine = true
         )
-        
+
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-        modifier = Modifier.width(with(LocalDensity.current){textFieldSize.width.toDp()})) {
-            list.forEach { label->
+            modifier = Modifier.width(with(LocalDensity.current) { textFieldSize.width.toDp() })
+        ) {
+            list.forEach { label ->
                 DropdownMenuItem(onClick = {
                     selectedItem = label
                     expanded = false
@@ -250,18 +257,22 @@ fun dropDownMenu(list : List<String>): String {
                 }
             }
         }
-        
+
     }
     return selectedItem
 }
 
 @Composable
-fun userServicesRecyclerView(parameterList: List<UserViewPair>, onItemClick: ((UserViewPair) -> Unit)?){
+fun userServicesRecyclerView(
+    parameterList: List<UserViewPair>,
+    onItemClick: ((UserViewPair) -> Unit)?
+) {
 
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
-        items(items = parameterList,) { parameter->
+        items(items = parameterList) { parameter ->
             Surface(
-                modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)) {
+                modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+            ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -280,7 +291,8 @@ fun userServicesRecyclerView(parameterList: List<UserViewPair>, onItemClick: ((U
                         ) {
                             Text(
                                 text = parameter.name, style = MaterialTheme.typography.h6.copy(
-                                    fontWeight = FontWeight.W400),
+                                    fontWeight = FontWeight.W400
+                                ),
                                 modifier = Modifier
                                     .align(Alignment.Start)
                                     .padding(30.dp, 25.dp, 0.dp, 0.dp),
@@ -288,7 +300,8 @@ fun userServicesRecyclerView(parameterList: List<UserViewPair>, onItemClick: ((U
 
                             )
                         }
-                        Image(painter = parameter.icon,
+                        Image(
+                            painter = parameter.icon,
                             contentDescription = "Login Logo",
                             modifier = Modifier
                                 .size(80.dp)
