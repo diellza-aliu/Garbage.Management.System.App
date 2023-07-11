@@ -48,8 +48,8 @@ fun UserServicesScreen(
     navController: NavController
 ) {
 
-
-    var selectedItem = remember { mutableStateOf<MenuItem?>(MenuItem("", "", "", null)) }
+    var registerComplaint = stringResource(R.string.Register_Complaint)
+    var selectedItem = remember { mutableStateOf<MenuItem?>(MenuItem(id = "Register Complaint", title = registerComplaint , contentDescription = "Go to settings screen", icon = Icons.Default.Create))}
 
     Column(modifier = Modifier.background(Color.White)) {
         val sheetState = rememberBottomSheetState(
